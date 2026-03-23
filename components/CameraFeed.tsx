@@ -86,12 +86,15 @@ const CameraFeed = forwardRef<CameraHandle, CameraFeedProps>(({ active, facingMo
       let msg = "Camera Optics Malfunction. Check Permissions.";
       let type = "unknown";
       
-      if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
-        msg = "Camera access denied by user. Check browser settings.";
+      if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError' || err.message?.toLowerCase().includes('permission')) {
+        msg = err.message || "Camera access denied or dismissed. Check browser/system settings.";
         type = "permission";
       } else if (err.name === 'NotFoundError' || err.name === 'DevicesNotFoundError') {
         msg = "No compatible optics found on this hardware.";
         type = "hardware";
+      } else if (err.name === 'AbortError') {
+        msg = "Camera request was dismissed. Please try again.";
+        type = "dismissed";
       }
       
       setError({ message: msg, type });

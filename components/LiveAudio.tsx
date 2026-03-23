@@ -59,9 +59,15 @@ const LiveAudio: React.FC<LiveAudioProps> = ({ onClose, onCapture, onTranscript 
         }
 
         return stream;
-    } catch (e) {
+    } catch (e: any) {
         console.error("Camera/Mic Error", e);
-        setError("Camera/Mic Access Denied");
+        if (e.name === 'NotAllowedError' || e.name === 'PermissionDeniedError' || e.message?.toLowerCase().includes('permission')) {
+            setError(e.message || "Camera/Mic Permission Denied");
+        } else if (e.name === 'AbortError') {
+            setError("Camera/Mic Permission Dismissed");
+        } else {
+            setError("Camera/Mic Access Denied");
+        }
         return null;
     }
   }, [facingMode]);
@@ -162,7 +168,7 @@ const LiveAudio: React.FC<LiveAudioProps> = ({ onClose, onCapture, onTranscript 
                 if (!sessionRef.current) return;
                 const inputData = e.inputBuffer.getChannelData(0);
                 const pcmBlob = createPcmBlob(inputData);
-                session.sendRealtimeInput({ media: pcmBlob });
+                session.sendRealtimeInput({ audio: pcmBlob });
             };
             
             source.connect(processor);
@@ -186,7 +192,7 @@ const LiveAudio: React.FC<LiveAudioProps> = ({ onClose, onCapture, onTranscript 
                     if (blob) {
                         const base64 = await blobToBase64(blob);
                         session.sendRealtimeInput({ 
-                            media: { mimeType: 'image/jpeg', data: base64 } 
+                            video: { mimeType: 'image/jpeg', data: base64 } 
                         });
                     }
                  }, 'image/jpeg', 0.6);

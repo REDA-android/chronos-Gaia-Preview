@@ -541,7 +541,7 @@ const App: React.FC = () => {
                 ) : (
                   <CameraFeed 
                     ref={cameraRef} 
-                    active={isCameraEnabled} 
+                    active={isCameraEnabled && !liveMode} 
                     facingMode={settings.facingMode} 
                     resolution={settings.resolution}
                     onResolutionChange={(res) => setSettings({...settings, resolution: res})}
