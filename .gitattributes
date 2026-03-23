@@ -15,3 +15,8 @@
 *.woff binary
 *.woff2 binary
 *.eot binary
+
+# Gradle wrapper specific rules
+android/gradle/wrapper/gradle-wrapper.jar binary
+android/gradlew text eol=lf
+android/gradlew.bat text eol=crlf
