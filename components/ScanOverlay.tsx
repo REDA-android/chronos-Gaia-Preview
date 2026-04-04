@@ -44,7 +44,7 @@ const ScanOverlay: React.FC = () => {
       {/* Data Readout */}
       <div className="absolute top-10 left-24 font-mono text-[9px] text-cyber-accent uppercase tracking-[0.2em] space-y-2 drop-shadow-md">
         <div className="flex items-center gap-2 animate-pulse"><div className="w-1.5 h-1.5 bg-cyber-accent rounded-full"></div> NEURAL_SCAN_ACTIVE</div>
-        <p className="text-white/40">RESOLVING_BOTANICAL_ID: <span className="text-white">GAIA_X_092</span></p>
+        <p className="text-white/40">RESOLVING_BOTANICAL_ID: <span className="text-white">GEMMA_X_092</span></p>
         <p className="text-white/40">SIGNAL_STRENGTH: <span className="text-white">98.4%</span></p>
       </div>
       

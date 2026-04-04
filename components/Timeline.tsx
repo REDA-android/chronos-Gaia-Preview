@@ -49,7 +49,7 @@ const Timeline: React.FC<TimelineProps> = ({ images, onSelect }) => {
           <div 
             key={img.id} 
             onClick={() => onSelect(img)}
-            className={`group relative cursor-pointer w-48 h-32 rounded-lg overflow-hidden border-2 transition-all hover:scale-105 ${getHealthColor(img)}`}
+            className={`group relative cursor-pointer w-36 h-24 sm:w-48 sm:h-32 rounded-lg overflow-hidden border-2 transition-all hover:scale-105 ${getHealthColor(img)}`}
           >
             <img src={img.dataUrl} alt="Snapshot" className="w-full h-full object-cover" />
             <div className="absolute inset-0 bg-black/40 group-hover:bg-black/0 transition-colors"></div>

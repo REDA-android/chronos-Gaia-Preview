@@ -19,14 +19,14 @@ const Onboarding: React.FC<OnboardingProps> = ({ onComplete }) => {
 
   const steps = [
     {
-      title: "Welcome to Chronos Gaia",
+      title: "Welcome to Chronos Gemma",
       description: "Your intelligent plant growth companion. Let's get you started with monitoring your botanical friends.",
       icon: <Leaf className="text-cyber-accent" size={48} />,
       color: "from-cyber-accent/20 to-transparent"
     },
     {
       title: "Automated Monitoring",
-      description: "Set a capture interval in the System Config. Chronos Gaia will automatically take snapshots and analyze them for you.",
+      description: "Set a capture interval in the System Config. Chronos Gemma will automatically take snapshots and analyze them for you.",
       icon: <Camera className="text-cyber-success" size={48} />,
       color: "from-cyber-success/20 to-transparent"
     },

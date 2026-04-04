@@ -1,6 +1,6 @@
 {
-  "name": "AppFlow",
-  "description": "Botanical monitoring application with intelligent flow and real-time analysis.",
+  "name": "Gemma AI",
+  "description": "Advanced botanical monitoring and growth analysis powered by Gemma AI.",
   "requestFramePermissions": [
     "camera",
     "microphone",

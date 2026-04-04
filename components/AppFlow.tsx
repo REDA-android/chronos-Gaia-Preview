@@ -137,7 +137,7 @@ const AppFlow: React.FC<AppFlowProps> = ({ images }) => {
           <p className="text-[8px] font-mono text-gray-600 uppercase tracking-[0.3em]">Processing botanical telemetry...</p>
         </div>
         <div className="text-right">
-          <p className="text-[24px] font-mono font-bold text-white/10 tracking-tighter leading-none">GAIA_OS</p>
+          <p className="text-[24px] font-mono font-bold text-white/10 tracking-tighter leading-none">GEMMA_OS</p>
           <p className="text-[8px] font-mono text-gray-700 uppercase tracking-widest">v3.1.4-LATEST</p>
         </div>
       </div>

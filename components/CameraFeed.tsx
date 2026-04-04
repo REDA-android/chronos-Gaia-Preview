@@ -61,9 +61,9 @@ const CameraFeed = forwardRef<CameraHandle, CameraFeedProps>(({ active, facingMo
       }
 
       const resConstraints = {
-        low: { width: { ideal: 640 }, height: { ideal: 480 } },
-        med: { width: { ideal: 1280 }, height: { ideal: 720 } },
-        high: { width: { ideal: 1920 }, height: { ideal: 1080 } }
+        low: { width: { ideal: 640 } },
+        med: { width: { ideal: 1280 } },
+        high: { width: { ideal: 1920 } }
       }[resolution];
 
       const stream = await navigator.mediaDevices.getUserMedia({ 
@@ -206,12 +206,12 @@ const CameraFeed = forwardRef<CameraHandle, CameraFeedProps>(({ active, facingMo
           
           {/* Feed HUD */}
           <div className="absolute top-4 left-4 flex flex-col gap-2 z-20 pointer-events-none">
-            <div className="flex items-center gap-2 bg-black/60 px-3 py-1 rounded border border-cyber-accent/30 backdrop-blur-md">
-              <span className="text-[10px] font-mono text-cyber-accent font-bold uppercase tracking-widest">
-                CAM-01 // {facingMode.toUpperCase()}
+            <div className="flex items-center gap-2 bg-black/60 px-3 py-1.5 rounded border border-cyber-accent/30 backdrop-blur-md">
+              <span className="text-[11px] sm:text-xs font-mono text-cyber-accent font-bold uppercase tracking-widest">
+                CAM-01 // {facingMode.toUpperCase()} // {resolution.toUpperCase()}
               </span>
             </div>
-            <div className="flex items-center gap-2 bg-black/40 px-3 py-1 rounded border border-white/5 text-[10px] font-mono text-white/40">
+            <div className="flex items-center gap-2 bg-black/40 px-3 py-1 rounded border border-white/5 text-[10px] sm:text-[11px] font-mono text-white/40">
               {new Date().toLocaleTimeString()}
             </div>
           </div>
@@ -244,12 +244,12 @@ const CameraFeed = forwardRef<CameraHandle, CameraFeedProps>(({ active, facingMo
               </div>
             )}
             
-            <div className="flex bg-black/60 border border-white/10 rounded-lg p-0.5 backdrop-blur-md">
+            <div className="flex bg-black/60 border border-white/10 rounded-lg p-1 backdrop-blur-md">
               {(['low', 'med', 'high'] as const).map((res) => (
                 <button
                   key={res}
                   onClick={() => onResolutionChange?.(res)}
-                  className={`px-2 py-0.5 text-[9px] font-bold rounded transition-all font-mono uppercase ${resolution === res ? 'bg-cyber-success text-black' : 'text-gray-500 hover:text-white'}`}
+                  className={`px-3 py-1 text-[10px] sm:text-xs font-bold rounded transition-all font-mono uppercase ${resolution === res ? 'bg-cyber-success text-black' : 'text-gray-500 hover:text-white'}`}
                 >
                   {res}
                 </button>

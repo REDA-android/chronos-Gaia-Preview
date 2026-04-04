@@ -27,13 +27,6 @@ import CameraFeed, { CameraHandle } from './components/CameraFeed';
 import LiveAudio from './components/LiveAudio';
 import Timeline from './components/Timeline';
 import Onboarding from './components/Onboarding';
-import AppFlow from './components/AppFlow';
-import NeuralPulse from './components/NeuralPulse';
-import ScanOverlay from './components/ScanOverlay';
-import GrowthChart from './components/GrowthChart';
-import TelemetryChart from './components/TelemetryChart';
-import NeuralTerminal from './components/NeuralTerminal';
-import NeuralCore from './components/NeuralCore';
 import confetti from 'canvas-confetti';
 import { CapturedImage, MonitorSettings, ChatMessage, UserProfile } from './types';
 import { 
@@ -50,21 +43,18 @@ import {
   Leaf, 
   Play, 
   Square, 
-  Mic, 
   MessageSquare, 
   MapPin, 
   Globe, 
   BrainCircuit, 
   Volume2,
   Clock, 
-  Zap,
   Eye,
   FileText,
   PlayCircle,
   EyeOff,
   Trash2,
   AlertTriangle,
-  CheckCircle,
   Activity,
   Terminal,
   Settings,
@@ -73,11 +63,8 @@ import {
   Cpu,
   ChevronDown,
   ChevronUp,
-  Siren,
-  Radio,
   Tag,
   Calendar,
-  Video,
   Sprout,
   Droplet,
   Sun,
@@ -94,14 +81,6 @@ const App: React.FC = () => {
   const [user, setUser] = useState<any>(null);
   const [isAuthReady, setIsAuthReady] = useState(false);
   const [active, setActive] = useState(false);
-  const [appFlowMode, setAppFlowMode] = useState(false);
-  const [scanning, setScanning] = useState(false);
-  const [systemLogs, setSystemLogs] = useState<string[]>([
-    "System initialized.",
-    "Neural link established.",
-    "Gaia core online.",
-    "Awaiting botanical telemetry..."
-  ]);
   const [connectionStatus, setConnectionStatus] = useState<'STABLE' | 'SYNCING' | 'ERROR'>('STABLE');
   const [isCameraEnabled, setIsCameraEnabled] = useState(true);
   const [images, setImages] = useState<CapturedImage[]>([]);
@@ -319,7 +298,7 @@ const App: React.FC = () => {
     if (images.length === 0) return;
     
     let content = '';
-    let fileName = `gaia_export_${Date.now()}`;
+    let fileName = `gemma_export_${Date.now()}`;
     let mimeType = '';
 
     if (format === 'json') {
@@ -455,7 +434,7 @@ const App: React.FC = () => {
       <div className="min-h-screen bg-cyber-900 flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <Leaf className="text-cyber-accent animate-pulse" size={48} />
-          <p className="text-cyber-accent font-mono text-xs tracking-widest">INITIALIZING GAIA...</p>
+          <p className="text-cyber-accent font-mono text-xs tracking-widest uppercase">INITIALIZING GEMMA...</p>
         </div>
       </div>
     );
@@ -463,7 +442,7 @@ const App: React.FC = () => {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-cyber-900 text-gray-200 font-sans flex flex-col items-center justify-center p-6 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-cyber-800/20 via-cyber-900 to-black">
+      <div className="min-h-screen bg-cyber-900 text-gray-200 font-sans flex flex-col items-center justify-center p-4 sm:p-6 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-cyber-800/20 via-cyber-900 to-black">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -475,7 +454,7 @@ const App: React.FC = () => {
             </div>
           </div>
           <div className="space-y-2">
-            <h1 className="text-3xl font-mono font-bold tracking-tighter">CHRONOS <span className="text-cyber-accent">GAIA</span></h1>
+            <h1 className="text-3xl font-mono font-bold tracking-tighter">CHRONOS <span className="text-cyber-accent">GEMMA</span></h1>
             <p className="text-gray-500 text-sm font-mono tracking-widest uppercase">Neural Plant Monitoring System</p>
           </div>
           <p className="text-gray-400 text-sm leading-relaxed">
@@ -496,17 +475,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-cyber-900 text-gray-200 font-sans flex flex-col selection:bg-cyber-accent selection:text-black relative overflow-hidden">
-      <NeuralPulse />
       
-      {/* Neural Link Status Bar */}
-      <div className="h-1 w-full bg-cyber-accent/10 relative overflow-hidden z-[100]">
-        <motion.div 
-          animate={{ x: ['-100%', '100%'] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-0 w-1/3 bg-gradient-to-r from-transparent via-cyber-accent to-transparent opacity-50"
-        />
-      </div>
-
       {/* Global Error Toast */}
       {globalError && (
         <div className="fixed top-20 left-1/2 -translate-x-1/2 z-[150] animate-in slide-in-from-top duration-300">
@@ -530,27 +499,23 @@ const App: React.FC = () => {
              <div className="absolute inset-0 blur-2xl opacity-20 bg-cyber-accent animate-pulse"></div>
              <Leaf className="text-cyber-accent/30 relative" size={64} />
           </div>
-          <div className="text-[120px] font-mono font-thin text-white/5 tracking-tighter tabular-nums leading-none mt-8">
+          <div className="text-[18vw] sm:text-[120px] font-mono font-thin text-white/5 tracking-tighter tabular-nums leading-none mt-8">
               {currentTime.getHours().toString().padStart(2, '0')}
               <span className="animate-pulse">:</span>
               {currentTime.getMinutes().toString().padStart(2, '0')}
           </div>
-          <p className="text-cyber-accent/10 font-mono text-[10px] tracking-[0.5em] mt-8 uppercase">Gaia Passive Monitoring Active</p>
+          <p className="text-cyber-accent/10 font-mono text-[10px] tracking-[0.5em] mt-8 uppercase">Gemma Passive Monitoring Active</p>
           <p className="text-white/5 text-[9px] absolute bottom-12 font-mono">DOUBLE CLICK TO RECALL SYSTEM</p>
         </div>
       )}
 
       {/* Header */}
-      <header className="border-b border-white/5 bg-black/40 backdrop-blur-lg p-3 sticky top-0 z-30 flex justify-between items-center px-6">
+      <header className="border-b border-white/5 bg-black/40 backdrop-blur-lg p-3 sticky top-0 z-30 flex justify-between items-center px-4 sm:px-6">
         <div className="flex items-center gap-3">
           <Leaf className="text-cyber-accent w-6 h-6 drop-shadow-[0_0_8px_rgba(132,204,22,0.4)]"/>
-          <h1 className="font-mono font-bold tracking-tighter text-lg bg-gradient-to-r from-white to-gray-500 bg-clip-text text-transparent">CHRONOS <span className="text-cyber-accent">GAIA</span></h1>
+          <h1 className="font-mono font-bold tracking-tighter text-lg bg-gradient-to-r from-white to-gray-500 bg-clip-text text-transparent">CHRONOS <span className="text-cyber-accent">GEMMA</span></h1>
         </div>
         <div className="flex items-center gap-4">
-          <div className="hidden md:flex items-center gap-2 px-3 py-1 bg-cyber-accent/5 border border-cyber-accent/20 rounded-full">
-            <div className={`w-1.5 h-1.5 rounded-full animate-pulse ${connectionStatus === 'STABLE' ? 'bg-cyber-accent' : connectionStatus === 'SYNCING' ? 'bg-blue-400' : 'bg-red-500'}`} />
-            <span className="text-[9px] font-mono text-gray-400 uppercase tracking-widest">Link: {connectionStatus}</span>
-          </div>
           <div className="hidden sm:flex flex-col items-end">
             <span className="text-[10px] font-mono text-gray-400 uppercase tracking-widest">{user.displayName || 'Neural Entity'}</span>
             <button onClick={handleLogout} className="text-[8px] font-mono text-cyber-accent hover:text-white uppercase tracking-widest">Disconnect</button>
@@ -572,121 +537,19 @@ const App: React.FC = () => {
           >
             <Settings size={18}/>
           </button>
-          <button 
-            onClick={() => setAppFlowMode(!appFlowMode)}
-            className={`flex items-center gap-2 px-4 py-1.5 rounded-lg font-bold text-[11px] tracking-widest transition-all border ${appFlowMode ? 'bg-cyber-accent text-black border-cyber-accent shadow-[0_0_15px_rgba(34,211,238,0.5)]' : 'bg-white/5 text-gray-400 border-white/5 hover:bg-white/10'}`}
-          >
-            <Activity size={14} /> {appFlowMode ? 'EXIT FLOW' : 'APPFLOW'}
-          </button>
-          <button 
-            onClick={() => setLiveMode(true)} 
-            className="flex items-center gap-2 px-4 py-1.5 bg-cyber-accent/5 border border-cyber-accent/40 text-cyber-accent rounded-lg font-bold text-[11px] tracking-widest hover:bg-cyber-accent hover:text-black transition-all shadow-[0_0_15px_rgba(132,204,22,0.1)]"
-          >
-            <Video size={14}/> VIDEO LINK
-          </button>
         </div>
       </header>
 
-      <div className="flex-1 flex overflow-hidden">
-        {appFlowMode ? (
-          <div className="flex-1 p-6">
-            <AppFlow images={images} />
-          </div>
-        ) : (
-          <main className="flex-1 p-6 space-y-6 overflow-y-auto custom-scrollbar">
-            {/* Neural Dashboard Summary */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div className="md:col-span-1 bg-black/40 backdrop-blur-md border border-white/5 p-4 rounded-2xl flex items-center justify-center group hover:border-cyber-accent/30 transition-all">
-                <NeuralCore active={active} processing={isProcessing} speaking={!!speakingMessageId} />
-              </div>
-              <div className="bg-black/40 backdrop-blur-md border border-white/5 p-4 rounded-2xl flex flex-col gap-4 group hover:border-cyber-accent/30 transition-all">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 bg-cyber-accent/10 rounded-xl text-cyber-accent">
-                    <Activity size={24} />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Neural Health</p>
-                    <p className={`text-lg font-bold tracking-tight ${images[images.length-1]?.healthStatus === 'HEALTHY' ? 'text-cyber-accent' : 'text-cyber-warn'}`}>
-                      {images[images.length-1]?.healthStatus || 'AWAITING DATA'}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex-1">
-                   <div className="flex justify-between text-[9px] font-mono text-gray-600 mb-1">
-                     <span>STABILITY</span>
-                     <span>98.2%</span>
-                   </div>
-                   <div className="h-1 bg-white/5 rounded-full overflow-hidden">
-                     <motion.div 
-                       initial={{ width: 0 }}
-                       animate={{ width: '98.2%' }}
-                       className="h-full bg-cyber-accent"
-                     />
-                   </div>
-                </div>
-              </div>
-              <div className="bg-black/40 backdrop-blur-md border border-white/5 p-4 rounded-2xl flex flex-col gap-4 group hover:border-cyber-accent/30 transition-all">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 bg-blue-500/10 rounded-xl text-blue-400">
-                    <Sprout size={24} />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Growth Stage</p>
-                    <p className="text-lg font-bold tracking-tight text-white uppercase">
-                      {images[images.length-1]?.growthStage || 'INITIALIZING'}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex-1">
-                   <div className="flex justify-between text-[9px] font-mono text-gray-600 mb-1">
-                     <span>PROGRESSION</span>
-                     <span>{images.length > 0 ? `${Math.min(100, images.length * 10)}%` : '0%'}</span>
-                   </div>
-                   <div className="h-1 bg-white/5 rounded-full overflow-hidden">
-                     <motion.div 
-                       initial={{ width: 0 }}
-                       animate={{ width: images.length > 0 ? `${Math.min(100, images.length * 10)}%` : '0%' }}
-                       className="h-full bg-blue-400"
-                     />
-                   </div>
-                </div>
-              </div>
-              <div className="bg-black/40 backdrop-blur-md border border-white/5 p-4 rounded-2xl flex flex-col gap-4 group hover:border-cyber-accent/30 transition-all">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 bg-purple-500/10 rounded-xl text-purple-400">
-                    <Zap size={24} />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Confidence</p>
-                    <p className="text-lg font-bold tracking-tight text-white">
-                      {images[images.length-1]?.confidence ? `${images[images.length-1].confidence}%` : '0%'}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex-1">
-                   <div className="flex justify-between text-[9px] font-mono text-gray-600 mb-1">
-                     <span>AI_PRECISION</span>
-                     <span>{images[images.length-1]?.confidence || 0}%</span>
-                   </div>
-                   <div className="h-1 bg-white/5 rounded-full overflow-hidden">
-                     <motion.div 
-                       initial={{ width: 0 }}
-                       animate={{ width: `${images[images.length-1]?.confidence || 0}%` }}
-                       className="h-full bg-purple-400"
-                     />
-                   </div>
-                </div>
-              </div>
-            </div>
-
+      <div className="flex-1 flex overflow-hidden relative">
+        <main className="flex-1 p-4 sm:p-6 space-y-6 overflow-y-auto custom-scrollbar">
             <div className="grid lg:grid-cols-12 gap-6">
               <div className="lg:col-span-8 space-y-6">
-                <div className="aspect-video bg-black rounded-xl overflow-hidden border border-cyber-700/50 relative shadow-2xl group ring-1 ring-white/5">
+                <div className="aspect-square sm:aspect-video bg-black rounded-xl overflow-hidden border border-cyber-700/50 relative shadow-2xl group ring-1 ring-white/5">
                   {/* Visual Flash Effect */}
                   <div className={`absolute inset-0 bg-white z-[60] pointer-events-none transition-opacity duration-200 ease-out ${flash ? 'opacity-80' : 'opacity-0'}`}></div>
 
                   {playbackMode && selectedImage ? (
-                    <img src={selectedImage.dataUrl} className="w-full h-full object-contain" alt="Selected Frame" />
+                    <img src={selectedImage.dataUrl} className="w-full h-full object-cover" alt="Selected Frame" />
                   ) : (
                     <>
                       <CameraFeed 
@@ -696,72 +559,47 @@ const App: React.FC = () => {
                         resolution={settings.resolution}
                         onResolutionChange={(res) => setSettings({...settings, resolution: res})}
                       />
-                      {active && <ScanOverlay />}
-                      {scanning && <ScanOverlay />}
                     </>
                   )}
                 
                 {/* Bottom Left Feed Controls */}
-                <div className="absolute bottom-6 left-6 flex gap-3 pointer-events-auto">
+                <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 flex gap-2 sm:gap-3 pointer-events-auto">
                   <button 
                     onClick={() => setActive(!active)} 
-                    className={`flex items-center gap-2 px-8 py-3 rounded-lg font-bold transition-all shadow-lg text-xs tracking-widest uppercase ${active ? 'bg-cyber-warn text-white shadow-cyber-warn/20 ring-1 ring-red-400/50' : 'bg-cyber-accent text-black shadow-cyber-accent/20 ring-1 ring-lime-400/50'}`}
+                    className={`flex items-center gap-2 px-4 sm:px-8 py-2 sm:py-3 rounded-lg font-bold transition-all shadow-lg text-[10px] sm:text-xs tracking-widest uppercase ${active ? 'bg-cyber-warn text-white shadow-cyber-warn/20 ring-1 ring-red-400/50' : 'bg-cyber-accent text-black shadow-cyber-accent/20 ring-1 ring-lime-400/50'}`}
                   >
-                    {active ? <Square size={14} fill="currentColor"/> : <Play size={14} fill="currentColor"/>}
+                    {active ? <Square size={12} fill="currentColor"/> : <Play size={12} fill="currentColor"/>}
                     {active ? 'Stop' : 'Start'}
                   </button>
                   <button 
                     onClick={() => images.length > 0 && setPlaybackMode(!playbackMode)} 
                     disabled={images.length === 0} 
-                    className={`flex items-center gap-2 px-6 py-3 bg-black/80 border border-cyber-700/50 rounded-lg font-bold transition-all hover:bg-black text-xs uppercase tracking-widest ${playbackMode ? 'text-cyber-accent border-cyber-accent shadow-[0_0_10px_rgba(132,204,22,0.2)]' : 'text-white disabled:opacity-30 disabled:grayscale'}`}
+                    className={`flex items-center gap-2 px-3 sm:px-6 py-2 sm:py-3 bg-black/80 border border-cyber-700/50 rounded-lg font-bold transition-all hover:bg-black text-[10px] sm:text-xs uppercase tracking-widest ${playbackMode ? 'text-cyber-accent border-cyber-accent shadow-[0_0_10px_rgba(132,204,22,0.2)]' : 'text-white disabled:opacity-30 disabled:grayscale'}`}
                   >
-                    <PlayCircle size={16}/> Playback
+                    <PlayCircle size={14}/> Playback
                   </button>
                 </div>
 
                 {/* Bottom Right Feed Controls */}
-                <div className="absolute bottom-6 right-6 flex gap-3 pointer-events-auto">
+                <div className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 flex gap-2 sm:gap-3 pointer-events-auto">
                   <button 
                     onClick={() => setIsCameraEnabled(!isCameraEnabled)} 
-                    className={`p-3 rounded-full transition-all border shadow-lg ${isCameraEnabled ? 'bg-cyber-success/10 text-cyber-success border-cyber-success/40' : 'bg-gray-800/50 text-gray-500 border-gray-700'}`}
+                    className={`p-2.5 sm:p-3 rounded-full transition-all border shadow-lg ${isCameraEnabled ? 'bg-cyber-success/10 text-cyber-success border-cyber-success/40' : 'bg-gray-800/50 text-gray-500 border-gray-700'}`}
                   >
-                    <Power size={20}/>
-                  </button>
-                  {/* Snapshot Button / Neural Scan */}
-                  <button 
-                    onClick={() => {
-                      setScanning(true);
-                      setConnectionStatus('SYNCING');
-                      setSystemLogs(prev => [...prev, "Initiating deep neural scan...", "Analyzing botanical structure...", "Syncing with Gaia network..."]);
-                      setTimeout(() => {
-                        setScanning(true); // Keep scanning overlay for a bit
-                        setSystemLogs(prev => [...prev, "Extracting biometric markers...", "Calculating growth probability..."]);
-                      }, 1500);
-                      setTimeout(() => {
-                        setScanning(false);
-                        setConnectionStatus('STABLE');
-                        setSystemLogs(prev => [...prev, "Scan complete. Data uploaded to neural core."]);
-                        handleManualCapture();
-                      }, 4000);
-                    }} 
-                    disabled={scanning}
-                    className={`p-3 border rounded-full transition-all shadow-lg backdrop-blur-md group ${scanning ? 'bg-cyber-accent text-black border-cyber-accent animate-pulse' : 'bg-white/5 border-white/10 text-white hover:bg-cyber-accent hover:text-black'}`}
-                    title="Neural Scan"
-                  >
-                    <Zap size={20} className={scanning ? 'animate-spin' : 'group-hover:scale-110 transition-transform duration-200'}/>
+                    <Power size={18}/>
                   </button>
                   <button 
                     onClick={handleManualCapture} 
-                    className="p-3 bg-white/5 border border-white/10 text-white rounded-full hover:bg-cyber-accent hover:text-black transition-all shadow-lg backdrop-blur-md group"
+                    className="p-2.5 sm:p-3 bg-white/5 border border-white/10 text-white rounded-full hover:bg-cyber-accent hover:text-black transition-all shadow-lg backdrop-blur-md group"
                     title="Capture Snapshot"
                   >
-                    <Camera size={20} className="group-hover:scale-110 transition-transform duration-200"/>
+                    <Camera size={18} className="group-hover:scale-110 transition-transform duration-200"/>
                   </button>
                 </div>
               </div>
 
               {/* Timeline Display */}
-              <div className="bg-cyber-800/20 p-5 rounded-xl border border-white/5 backdrop-blur-sm">
+              <div className="bg-cyber-800/20 p-3 sm:p-5 rounded-xl border border-white/5 backdrop-blur-sm">
                 <div className="flex justify-between items-center mb-6">
                   <h3 className="text-[10px] font-mono text-gray-500 flex items-center gap-3 uppercase tracking-[0.2em]">
                     <Clock size={12} className="text-cyber-accent"/> Timeline 
@@ -776,29 +614,13 @@ const App: React.FC = () => {
                 </div>
                 <Timeline images={images} onSelect={(img) => { setPlaybackMode(false); setSelectedImage(img); }} />
               </div>
-
-              {/* Telemetry and Logs */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-black/40 backdrop-blur-md border border-white/5 p-5 rounded-2xl">
-                  <h3 className="text-[10px] font-mono text-gray-500 mb-4 uppercase tracking-widest flex items-center gap-2">
-                    <Radio size={12} className="text-cyber-accent"/> Neural Telemetry (Confidence %)
-                  </h3>
-                  <TelemetryChart images={images} />
-                </div>
-                <div className="bg-black/40 backdrop-blur-md border border-white/5 p-5 rounded-2xl">
-                  <h3 className="text-[10px] font-mono text-gray-500 mb-4 uppercase tracking-widest flex items-center gap-2">
-                    <Terminal size={12} className="text-cyber-accent"/> System Log Stream
-                  </h3>
-                  <NeuralTerminal messages={systemLogs} />
-                </div>
-              </div>
             </div>
 
             {/* AI Console Sidebar - Mid-page layout */}
-            <div className="lg:col-span-4 flex flex-col min-h-[500px]">
+            <div className="lg:col-span-4 flex flex-col min-h-[300px] sm:min-h-[500px]">
               <div className="flex-1 bg-cyber-800/10 border border-white/5 rounded-xl flex flex-col overflow-hidden backdrop-blur-md shadow-inner">
                 <div className="p-4 bg-black/30 border-b border-white/5 font-mono text-[10px] flex justify-between items-center uppercase tracking-[0.1em]">
-                  <span className="text-gray-400 flex items-center gap-2"><Terminal size={12}/> Console // Gaia v3.1</span>
+                  <span className="text-gray-400 flex items-center gap-2"><Terminal size={12}/> Console // Gemma v3.1</span>
                   <button 
                     onClick={() => images.length > 0 && generateGrowthReport(images.map(i => i.analysis || ""))} 
                     className="text-cyber-accent hover:text-white flex items-center gap-1.5 transition-colors"
@@ -818,7 +640,7 @@ const App: React.FC = () => {
                       <div className={`p-3.5 rounded-xl text-xs sm:text-sm max-w-[95%] shadow-sm ${m.role === 'user' ? 'bg-cyber-700/80 text-white border border-cyber-accent/20' : 'bg-black/50 border border-white/5 text-gray-300'}`}>
                         <div className="flex justify-between items-start gap-4 mb-2">
                           <span className={`text-[9px] font-mono uppercase tracking-widest ${m.role === 'user' ? 'text-cyber-accent' : 'text-blue-400'}`}>
-                            {m.role === 'user' ? 'Neural Entity' : 'Gaia Core'}
+                            {m.role === 'user' ? 'Neural Entity' : 'Gemma Core'}
                           </span>
                           {m.role === 'model' && (
                             <button 
@@ -861,7 +683,7 @@ const App: React.FC = () => {
                       type="text" 
                       value={userInput} 
                       onChange={e => setUserInput(e.target.value)} 
-                      placeholder="Query the Gaia network..." 
+                      placeholder="Query the Gemma network..." 
                       className="w-full bg-black/50 border border-white/10 rounded-lg py-3 px-4 text-sm focus:outline-none focus:border-cyber-accent/50 focus:ring-1 focus:ring-cyber-accent/20 text-white transition-all placeholder:text-gray-600"
                     />
                     <div className="absolute right-3 top-2.5 flex items-center gap-2">
@@ -907,48 +729,32 @@ const App: React.FC = () => {
             </div>
           </div>
         </main>
-      )}
 
         {/* System Config Sidebar - Styled exactly as requested */}
         <AnimatePresence>
           {showSettings && (
-            <motion.aside 
-              initial={{ x: 320, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: 320, opacity: 0 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="w-[320px] border-l border-white/10 bg-[#0a0f1a] p-6 overflow-y-auto custom-scrollbar shadow-2xl z-40"
-            >
+            <>
+              {/* Mobile Backdrop */}
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setShowSettings(false)}
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 lg:hidden"
+              />
+              <motion.aside 
+                initial={{ x: 320, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: 320, opacity: 0 }}
+                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                className="w-[300px] sm:w-[320px] fixed lg:relative inset-y-0 right-0 lg:inset-auto border-l border-white/10 bg-[#0a0f1a] p-5 sm:p-6 overflow-y-auto custom-scrollbar shadow-2xl z-40"
+              >
               <div className="flex justify-between items-center mb-8">
                 <h2 className="text-[13px] font-mono font-bold text-cyber-accent flex items-center gap-2 uppercase tracking-[0.1em]"><Settings size={16}/> System Config</h2>
                 <button onClick={() => setShowSettings(false)} className="text-gray-500 hover:text-white transition-colors"><X size={18}/></button>
               </div>
 
             <div className="space-y-10">
-              {/* Neural Analytics Section */}
-              <section className="space-y-4">
-                <label className="text-[10px] font-mono text-gray-500 uppercase tracking-widest flex items-center gap-2 font-bold"><Activity size={12}/> Neural Analytics</label>
-                <div className="bg-black/40 rounded-xl border border-white/5 p-4 overflow-hidden">
-                  <GrowthChart images={images} />
-                </div>
-              </section>
-
-              {/* Plant Identity Section */}
-              <section className="space-y-4">
-                <label className="text-[10px] font-mono text-gray-500 uppercase tracking-widest flex items-center gap-2 font-bold"><Leaf size={12}/> Plant Identity</label>
-                <div className="relative">
-                  <input 
-                    type="text" 
-                    placeholder="e.g. Monstera Deliciosa"
-                    value={settings.plantType}
-                    onChange={e => setSettings({...settings, plantType: e.target.value})}
-                    className="w-full bg-black/40 border border-white/5 rounded-lg py-2.5 px-4 text-xs font-mono focus:outline-none focus:border-cyber-accent/50 text-white transition-all placeholder:text-gray-700"
-                  />
-                  <Tag className="absolute right-3 top-2.5 text-gray-700" size={14} />
-                </div>
-                <p className="text-[9px] text-gray-600 font-mono leading-tight">Specifying the species allows Gaia to provide more accurate growth stage detection and health advice.</p>
-              </section>
-
               {/* Capture Frequency Section */}
               <section className="space-y-4">
                 <div className="flex justify-between items-center text-[10px] font-mono uppercase tracking-[0.1em]">
@@ -1099,14 +905,15 @@ const App: React.FC = () => {
               </section>
             </div>
           </motion.aside>
-        )}
-        </AnimatePresence>
-      </div>
+        </>
+      )}
+    </AnimatePresence>
+  </div>
 
       {/* Background Monitoring Indicator */}
       {active && !stealthMode && (
-        <div className="fixed bottom-6 left-6 z-20 pointer-events-none">
-          <div className="flex items-center gap-3 bg-black/80 backdrop-blur-md px-4 py-2 rounded-full border border-cyber-accent/30 shadow-2xl">
+        <div className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 z-20 pointer-events-none">
+          <div className="flex items-center gap-3 bg-black/80 backdrop-blur-md px-3 sm:px-4 py-2 rounded-full border border-cyber-accent/30 shadow-2xl">
              <div className="relative">
                 <div className="w-2.5 h-2.5 rounded-full bg-cyber-accent animate-ping absolute"></div>
                 <div className="w-2.5 h-2.5 rounded-full bg-cyber-accent relative"></div>
@@ -1120,7 +927,7 @@ const App: React.FC = () => {
         {showOnboarding && (
           <Onboarding onComplete={() => {
             setShowOnboarding(false);
-            localStorage.setItem('gaia_onboarding_complete', 'true');
+            localStorage.setItem('gemma_onboarding_complete', 'true');
             if (user) {
               setDoc(doc(db, 'users', user.uid), { hasCompletedOnboarding: true }, { merge: true });
             }

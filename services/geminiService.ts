@@ -71,7 +71,7 @@ export const sendMessage = async (
     model: modelName,
     config: {
       ...config,
-      systemInstruction: "You are Gaia, an expert AI botanist. You monitor plant growth, diagnose health issues, and offer gardening advice. Be precise and helpful.",
+      systemInstruction: "You are Gemma, an expert AI botanist. You monitor plant growth, diagnose health issues, and offer gardening advice. Be precise and helpful.",
     },
     history: history.map(h => ({
       role: h.role === 'model' ? 'model' : 'user',
@@ -148,7 +148,7 @@ export const analyzeImage = async (base64Data: string, prompt: string, plantType
 export const generateGrowthReport = async (logs: string[]) => {
   const ai = getAI();
   const prompt = `
-  SYSTEM: You are Gaia, an expert AI Botanist.
+  SYSTEM: You are Gemma, an expert AI Botanist.
   TASK: Analyze the following plant observation logs and generate a concise growth progress report. Highlight health status, growth rate, and any care recommendations.
   TONE: Scientific, encouraging, precise.
   FORMAT: Plain text, no markdown symbols like ** or #.
@@ -314,7 +314,7 @@ export const connectToLiveAPI = async (
       speechConfig: {
         voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Kore' } } // Kore has a gentle voice
       },
-      systemInstruction: "You are Gaia, an expert botanist AI assistant connected to a live video feed. Your job is to ANALYZE the plant life in the video in REAL-TIME. 1. Identify the plant and its current growth stage (germination, vegetative, flowering, etc.). 2. Detect any health issues like wilting, pests, or discoloration. 3. Provide immediate botanical advice to the user. Speak naturally and concisely.",
+      systemInstruction: "You are Gemma, an expert botanist AI assistant connected to a live video feed. Your job is to ANALYZE the plant life in the video in REAL-TIME. 1. Identify the plant and its current growth stage (germination, vegetative, flowering, etc.). 2. Detect any health issues like wilting, pests, or discoloration. 3. Provide immediate botanical advice to the user. Speak naturally and concisely.",
       tools: [{ functionDeclarations: [captureSnapshotTool] }]
     }
   });
