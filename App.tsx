@@ -7,10 +7,14 @@ import {
   googleProvider, 
   signInWithPopup, 
   signInWithRedirect,
+  signInWithCredential,
   getRedirectResult,
   signOut, 
   onAuthStateChanged 
 } from './firebase';
+import { GoogleAuthProvider } from 'firebase/auth';
+import { Capacitor } from '@capacitor/core';
+import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 import { 
   collection, 
   addDoc, 
@@ -456,9 +460,19 @@ const App: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      // On Android Capacitor, signInWithPopup is blocked by WebView security policies.
-      // We MUST use signInWithRedirect.
-      await signInWithRedirect(auth, googleProvider);
+      if (Capacitor.isNativePlatform()) {
+        // Use native Google Sign-In for Android/iOS
+        const result = await FirebaseAuthentication.signInWithGoogle();
+        if (result.credential?.idToken) {
+          const credential = GoogleAuthProvider.credential(result.credential.idToken);
+          await signInWithCredential(auth, credential);
+        } else {
+          throw new Error("No ID token returned from Google Sign-In");
+        }
+      } else {
+        // Fallback to popup for web
+        await signInWithPopup(auth, googleProvider);
+      }
     } catch (e: any) {
       console.error("Login Error:", e);
       setGlobalError("Login failed: " + (e.message || "Unknown error"));
