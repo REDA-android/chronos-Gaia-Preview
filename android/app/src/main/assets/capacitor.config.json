@@ -1,5 +1,13 @@
 {
 	"appId": "com.gemma.ai",
 	"appName": "Gemma AI",
-	"webDir": "dist"
+	"webDir": "dist",
+	"plugins": {
+		"FirebaseAuthentication": {
+			"skipNativeAuth": false,
+			"providers": [
+				"google.com"
+			]
+		}
+	}
 }
