@@ -12,11 +12,11 @@ import {
 const MODEL_CHAT_PRO = 'gemini-3.1-pro-preview';
 const MODEL_FAST_LITE = 'gemini-3.1-flash-lite-preview';
 const MODEL_SEARCH = 'gemini-3-flash-preview';
-const MODEL_MAPS = 'gemini-2.5-flash';
+const MODEL_MAPS = 'gemini-3-flash-preview';
 const MODEL_VISION = 'gemini-3.1-pro-preview';
-const MODEL_LIVE = 'gemini-2.5-flash-native-audio-preview-12-2025';
+const MODEL_LIVE = 'gemini-3.1-flash-live-preview';
 const MODEL_TTS = 'gemini-2.5-flash-preview-tts';
-const MODEL_IMAGE = 'gemini-3-pro-image-preview';
+const MODEL_IMAGE = 'gemini-2.5-flash-image';
 
 // --- Instance Helper ---
 const getAI = () => {
