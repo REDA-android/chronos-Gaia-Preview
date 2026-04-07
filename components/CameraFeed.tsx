@@ -68,13 +68,29 @@ const CameraFeed = forwardRef<CameraHandle, CameraFeedProps>(({ active, facingMo
         high: { width: { ideal: 1920 } }
       }[resolution];
 
-      const stream = await navigator.mediaDevices.getUserMedia({ 
-        video: { 
-          facingMode: facingMode,
-          ...resConstraints
-        }, 
-        audio: false 
-      });
+      let stream: MediaStream;
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ 
+          video: { 
+            facingMode: facingMode,
+            ...resConstraints
+          }, 
+          audio: false 
+        });
+      } catch (innerErr: any) {
+        // Fallback to any available camera if specific facingMode fails
+        if (innerErr.name === 'NotFoundError' || innerErr.name === 'DevicesNotFoundError') {
+          console.warn("Requested facingMode not found, falling back to default camera.");
+          stream = await navigator.mediaDevices.getUserMedia({ 
+            video: { 
+              ...resConstraints
+            }, 
+            audio: false 
+          });
+        } else {
+          throw innerErr;
+        }
+      }
 
       const track = stream.getVideoTracks()[0];
       const capabilities = track.getCapabilities ? (track.getCapabilities() as any) : {};

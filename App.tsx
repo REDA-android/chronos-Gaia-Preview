@@ -608,14 +608,14 @@ const App: React.FC = () => {
       )}
 
       {/* Header */}
-      <header className="fixed top-0 w-full z-50 bg-[#0a0f13]/80 backdrop-blur-xl flex justify-between items-center px-6 h-16 shadow-[0_20px_40px_rgba(0,0,0,0.4)] border-b border-white/5">
-        <div className="flex items-center gap-3">
+      <header className="fixed top-0 w-full z-50 bg-[#0a0f13]/80 backdrop-blur-xl flex justify-between items-center px-6 pt-[env(safe-area-inset-top)] h-[calc(4rem+env(safe-area-inset-top))] shadow-[0_20px_40px_rgba(0,0,0,0.4)] border-b border-white/5">
+        <div className="flex items-center gap-3 mt-2">
           <div className="w-8 h-8 rounded-full overflow-hidden bg-secondary-container flex items-center justify-center border border-primary/20">
             {user.photoURL ? <img src={user.photoURL} alt="Profile" className="w-full h-full object-cover" /> : <Activity size={16} className="text-primary" />}
           </div>
           <span className="text-xl font-extrabold font-headline text-primary tracking-tight">CHRONOS GEMMA</span>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 mt-2">
           <button 
             onClick={() => setStealthMode(!stealthMode)} 
             className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors active:scale-90 duration-200 ${stealthMode ? 'bg-primary/20 text-primary' : 'text-gray-400 hover:bg-white/5'}`}
@@ -638,7 +638,7 @@ const App: React.FC = () => {
       </header>
 
       <div className="flex-1 flex overflow-hidden relative">
-        <main className="flex-1 p-4 sm:p-6 space-y-6 overflow-y-auto custom-scrollbar pt-20 pb-32 max-w-7xl mx-auto w-full">
+        <main className="flex-1 p-4 sm:p-6 space-y-6 overflow-y-auto custom-scrollbar pt-[calc(5rem+env(safe-area-inset-top))] pb-[calc(8rem+env(safe-area-inset-bottom))] max-w-7xl mx-auto w-full">
           {activeTab === 'home' && <HomeTab images={images} active={active} setActive={setActive} />}
           {activeTab === 'scan' && (
             <ScanTab 
@@ -994,7 +994,7 @@ const App: React.FC = () => {
       </AnimatePresence>
 
       {/* Bottom Navigation Bar */}
-      <nav className="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-3 pb-6 bg-[#0a0f13]/90 backdrop-blur-xl z-50 rounded-t-[2.5rem] shadow-[0_-10px_30px_rgba(0,0,0,0.5)] border-t border-white/5">
+      <nav className="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-3 pb-[calc(1.5rem+env(safe-area-inset-bottom))] bg-[#0a0f13]/90 backdrop-blur-xl z-50 rounded-t-[2.5rem] shadow-[0_-10px_30px_rgba(0,0,0,0.5)] border-t border-white/5">
         <button 
           onClick={() => setActiveTab('home')}
           className={`flex flex-col items-center justify-center px-5 py-2 rounded-2xl transition-all duration-300 active:scale-95 ${activeTab === 'home' ? 'bg-primary/10 text-primary shadow-[0_0_15px_rgba(184,253,75,0.15)]' : 'text-gray-500 hover:text-primary'}`}

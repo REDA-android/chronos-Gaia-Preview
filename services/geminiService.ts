@@ -20,9 +20,12 @@ const MODEL_IMAGE = 'gemini-2.5-flash-image';
 
 // --- Instance Helper ---
 const getAI = () => {
-  const apiKey = process.env.GEMINI_API_KEY;
+  // Try platform-injected process.env first, then fallback to Vite-style meta.env
+  const apiKey = process.env.GEMINI_API_KEY || (import.meta as any).env?.VITE_GEMINI_API_KEY;
+  
   if (!apiKey) {
-    throw new Error("Gemini API Key is missing. Please check your environment variables.");
+    console.error("Gemini API Key is missing. [process.env.GEMINI_API_KEY] is undefined.");
+    throw new Error("Neural Link Offline: API Key not detected. Please check your system configuration.");
   }
   return new GoogleGenAI({ apiKey });
 };
