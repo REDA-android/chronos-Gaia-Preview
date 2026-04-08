@@ -7,7 +7,7 @@ import Markdown from 'react-markdown';
 import { 
   Leaf, Play, Square, MessageSquare, MapPin, Globe, BrainCircuit, Volume2,
   Clock, Eye, FileText, PlayCircle, EyeOff, Trash2, AlertTriangle, Activity,
-  Terminal, Settings, Camera, FastForward, Cpu, Sun, Power, LogOut, X
+  Terminal, Settings, Camera, FastForward, Cpu, Sun, Power, LogOut, X, Droplet, Zap
 } from 'lucide-react';
 
 export const HomeTab = ({ images, active, setActive }: any) => {

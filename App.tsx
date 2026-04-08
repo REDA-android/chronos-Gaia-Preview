@@ -608,7 +608,7 @@ const App: React.FC = () => {
       )}
 
       {/* Header */}
-      <header className="fixed top-0 w-full rounded-b-[2.5rem] bg-[#04110c]/80 backdrop-blur-3xl z-50 shadow-[0_20px_40px_rgba(0,0,0,0.3)] flex justify-between items-center px-6 pb-4 pt-[max(env(safe-area-inset-top),2rem)] border-b border-primary/10">
+      <header className="fixed top-[max(env(safe-area-inset-top),1rem)] left-4 right-4 z-50 flex items-center justify-between px-6 py-3 max-w-5xl mx-auto bg-emerald-950/40 backdrop-blur-3xl rounded-full shadow-[0_8px_32px_0_rgba(0,0,0,0.8)] border border-white/10 glass-edge-glow">
         <div className="flex items-center gap-3">
           <button 
             onClick={handleLogout}
@@ -616,7 +616,7 @@ const App: React.FC = () => {
           >
             {user.photoURL ? <img src={user.photoURL} alt="Profile" className="w-full h-full object-cover" /> : <Activity size={18} className="text-primary" />}
           </button>
-          <span className="text-xl font-extrabold tracking-tighter text-primary font-headline italic">Lumina Gemma</span>
+          <span className="text-xl font-extrabold tracking-tighter text-primary font-headline italic drop-shadow-[0_0_8px_rgba(157,216,80,0.5)]">Lumina Gemma</span>
         </div>
         <div className="flex items-center gap-2">
           <button 
@@ -991,35 +991,31 @@ const App: React.FC = () => {
       </AnimatePresence>
 
       {/* Bottom Navigation Bar */}
-      <nav className="fixed bottom-0 w-full z-50 px-4 pb-[max(env(safe-area-inset-bottom),1.5rem)] flex justify-center items-center bg-gradient-to-t from-[#04110c] via-[#04110c]/80 to-transparent pt-8 pointer-events-none">
-        <div className="w-full max-w-md rounded-full border border-white/5 bg-[#04110c]/60 backdrop-blur-[64px] shadow-2xl shadow-black/40 flex justify-around items-center px-2 py-2 pointer-events-auto">
+      <nav className="fixed bottom-[max(env(safe-area-inset-bottom),1.5rem)] left-4 right-4 z-50 flex justify-center items-center pointer-events-none">
+        <div className="w-full max-w-md rounded-full border border-white/10 bg-emerald-950/40 backdrop-blur-[80px] shadow-2xl shadow-black/50 glass-edge-glow flex justify-around items-center px-2 py-2 pointer-events-auto">
           <button 
             onClick={() => setActiveTab('home')}
-            className={`flex flex-col items-center justify-center p-3 rounded-full transition-all duration-300 ${activeTab === 'home' ? 'bg-primary text-[#04110c] shadow-[0_0_20px_rgba(192,254,113,0.4)] scale-110' : 'text-primary/60 hover:text-primary active:scale-95'}`}
+            className={`flex flex-col items-center justify-center p-3 rounded-full transition-all duration-500 ${activeTab === 'home' ? 'bg-primary/20 text-primary shadow-[0_0_20px_rgba(157,216,80,0.4)] scale-110' : 'text-emerald-100/40 hover:text-[#5adace] hover:scale-110 active:scale-95'}`}
           >
             <Activity size={24} />
-            <span className="font-label text-[9px] uppercase tracking-widest mt-1 hidden sm:block">Home</span>
           </button>
           <button 
             onClick={() => setActiveTab('plants')}
-            className={`flex flex-col items-center justify-center p-3 rounded-full transition-all duration-300 ${activeTab === 'plants' ? 'bg-primary text-[#04110c] shadow-[0_0_20px_rgba(192,254,113,0.4)] scale-110' : 'text-primary/60 hover:text-primary active:scale-95'}`}
+            className={`flex flex-col items-center justify-center p-3 rounded-full transition-all duration-500 ${activeTab === 'plants' ? 'bg-primary/20 text-primary shadow-[0_0_20px_rgba(157,216,80,0.4)] scale-110' : 'text-emerald-100/40 hover:text-[#5adace] hover:scale-110 active:scale-95'}`}
           >
             <Leaf size={24} />
-            <span className="font-label text-[9px] uppercase tracking-widest mt-1 hidden sm:block">Flora</span>
           </button>
           <button 
             onClick={() => setActiveTab('scan')}
-            className={`flex flex-col items-center justify-center p-3 rounded-full transition-all duration-300 ${activeTab === 'scan' ? 'bg-primary text-[#04110c] shadow-[0_0_20px_rgba(192,254,113,0.4)] scale-110' : 'text-primary/60 hover:text-primary active:scale-95'}`}
+            className={`flex flex-col items-center justify-center p-3 rounded-full transition-all duration-500 ${activeTab === 'scan' ? 'bg-primary/20 text-primary shadow-[0_0_20px_rgba(157,216,80,0.4)] scale-110' : 'text-emerald-100/40 hover:text-[#5adace] hover:scale-110 active:scale-95'}`}
           >
             <Camera size={24} />
-            <span className="font-label text-[9px] uppercase tracking-widest mt-1 hidden sm:block">Scan</span>
           </button>
           <button 
             onClick={() => setActiveTab('schedule')}
-            className={`flex flex-col items-center justify-center p-3 rounded-full transition-all duration-300 ${activeTab === 'schedule' ? 'bg-primary text-[#04110c] shadow-[0_0_20px_rgba(192,254,113,0.4)] scale-110' : 'text-primary/60 hover:text-primary active:scale-95'}`}
+            className={`flex flex-col items-center justify-center p-3 rounded-full transition-all duration-500 ${activeTab === 'schedule' ? 'bg-primary/20 text-primary shadow-[0_0_20px_rgba(157,216,80,0.4)] scale-110' : 'text-emerald-100/40 hover:text-[#5adace] hover:scale-110 active:scale-95'}`}
           >
             <Terminal size={24} />
-            <span className="font-label text-[9px] uppercase tracking-widest mt-1 hidden sm:block">Console</span>
           </button>
         </div>
       </nav>
