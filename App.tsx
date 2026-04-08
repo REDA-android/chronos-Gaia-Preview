@@ -608,37 +608,34 @@ const App: React.FC = () => {
       )}
 
       {/* Header */}
-      <header className="fixed top-0 w-full z-50 bg-[#0a0f13]/80 backdrop-blur-xl flex justify-between items-center px-6 pt-[env(safe-area-inset-top)] h-[calc(4rem+env(safe-area-inset-top))] shadow-[0_20px_40px_rgba(0,0,0,0.4)] border-b border-white/5">
-        <div className="flex items-center gap-3 mt-2">
-          <div className="w-8 h-8 rounded-full overflow-hidden bg-secondary-container flex items-center justify-center border border-primary/20">
-            {user.photoURL ? <img src={user.photoURL} alt="Profile" className="w-full h-full object-cover" /> : <Activity size={16} className="text-primary" />}
-          </div>
-          <span className="text-xl font-extrabold font-headline text-primary tracking-tight">CHRONOS GEMMA</span>
+      <header className="fixed top-0 w-full rounded-b-[2.5rem] bg-[#04110c]/80 backdrop-blur-3xl z-50 shadow-[0_20px_40px_rgba(0,0,0,0.3)] flex justify-between items-center px-6 pb-4 pt-[max(env(safe-area-inset-top),2rem)] border-b border-primary/10">
+        <div className="flex items-center gap-3">
+          <button 
+            onClick={handleLogout}
+            className="w-10 h-10 rounded-full overflow-hidden border border-primary/30 bg-surface-container-highest flex items-center justify-center hover:scale-105 active:scale-95 transition-all duration-500 cursor-pointer shadow-[0_0_15px_rgba(192,254,113,0.2)]"
+          >
+            {user.photoURL ? <img src={user.photoURL} alt="Profile" className="w-full h-full object-cover" /> : <Activity size={18} className="text-primary" />}
+          </button>
+          <span className="text-xl font-extrabold tracking-tighter text-primary font-headline italic">Lumina Gemma</span>
         </div>
-        <div className="flex items-center gap-3 mt-2">
+        <div className="flex items-center gap-2">
           <button 
             onClick={() => setStealthMode(!stealthMode)} 
-            className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors active:scale-90 duration-200 ${stealthMode ? 'bg-primary/20 text-primary' : 'text-gray-400 hover:bg-white/5'}`}
+            className={`w-10 h-10 flex items-center justify-center rounded-full transition-all duration-500 ${stealthMode ? 'bg-primary/20 text-primary' : 'text-primary/60 hover:bg-primary/10'}`}
           >
-            {stealthMode ? <Eye size={18} /> : <EyeOff size={18} />}
+            {stealthMode ? <Eye size={20} /> : <EyeOff size={20} />}
           </button>
           <button 
             onClick={() => setShowSettings(!showSettings)} 
-            className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors active:scale-90 duration-200 ${showSettings ? 'bg-primary/20 text-primary' : 'text-gray-400 hover:bg-white/5'}`}
+            className={`w-10 h-10 flex items-center justify-center rounded-full transition-all duration-500 ${showSettings ? 'bg-primary/20 text-primary' : 'text-primary/60 hover:bg-primary/10'}`}
           >
-            <Settings size={18}/>
-          </button>
-          <button 
-            onClick={handleLogout} 
-            className="w-10 h-10 flex items-center justify-center rounded-full transition-colors active:scale-90 duration-200 text-error hover:bg-error/10"
-          >
-            <LogOut size={18}/>
+            <Settings size={20}/>
           </button>
         </div>
       </header>
 
       <div className="flex-1 flex overflow-hidden relative">
-        <main className="flex-1 p-4 sm:p-6 space-y-6 overflow-y-auto custom-scrollbar pt-[calc(5rem+env(safe-area-inset-top))] pb-[calc(8rem+env(safe-area-inset-bottom))] max-w-7xl mx-auto w-full">
+        <main className="flex-1 p-4 sm:p-6 space-y-6 overflow-y-auto custom-scrollbar pt-[calc(6rem+max(env(safe-area-inset-top),2rem))] pb-[calc(8rem+max(env(safe-area-inset-bottom),2rem))] max-w-7xl mx-auto w-full">
           {activeTab === 'home' && <HomeTab images={images} active={active} setActive={setActive} />}
           {activeTab === 'scan' && (
             <ScanTab 
@@ -921,29 +918,29 @@ const App: React.FC = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-cyber-900 border border-cyber-accent/50 p-6 rounded-xl max-w-sm w-full shadow-[0_0_50px_rgba(132,204,22,0.1)] space-y-6"
+              className="bg-[#04110c] border border-primary/30 p-6 rounded-3xl max-w-sm w-full shadow-[0_0_50px_rgba(192,254,113,0.1)] space-y-6"
             >
-              <div className="flex items-center gap-4 text-cyber-accent">
-                <div className="p-3 bg-cyber-accent/10 rounded-full">
+              <div className="flex items-center gap-4 text-primary">
+                <div className="p-3 bg-primary/10 rounded-full">
                   <LogOut size={24} />
                 </div>
-                <h3 className="text-lg font-bold font-mono uppercase tracking-tighter">Disconnect Neural Link</h3>
+                <h3 className="text-lg font-bold font-headline tracking-tight">Disconnect Neural Link?</h3>
               </div>
               
-              <p className="text-sm text-gray-400 leading-relaxed">
-                Are you sure you want to terminate the neural connection? Your monitoring session will be suspended.
+              <p className="text-sm text-on-surface-variant leading-relaxed">
+                Are you sure you want to disconnect from the Lumina Ecosystem? Your monitoring session will be suspended.
               </p>
 
               <div className="flex gap-3">
                 <button 
                   onClick={() => setShowLogoutConfirm(false)}
-                  className="flex-1 py-3 bg-white/5 border border-white/10 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-all"
+                  className="flex-1 py-3 bg-white/5 border border-white/10 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-white/10 transition-all font-label"
                 >
-                  Stay Connected
+                  Cancel
                 </button>
                 <button 
                   onClick={confirmLogout}
-                  className="flex-1 py-3 bg-cyber-accent text-black rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-lime-500 transition-all shadow-[0_0_20px_rgba(132,204,22,0.3)]"
+                  className="flex-1 py-3 bg-primary text-[#04110c] rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-all shadow-[0_0_20px_rgba(192,254,113,0.3)] font-label"
                 >
                   Disconnect
                 </button>
@@ -994,35 +991,37 @@ const App: React.FC = () => {
       </AnimatePresence>
 
       {/* Bottom Navigation Bar */}
-      <nav className="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pt-3 pb-[calc(1.5rem+env(safe-area-inset-bottom))] bg-[#0a0f13]/90 backdrop-blur-xl z-50 rounded-t-[2.5rem] shadow-[0_-10px_30px_rgba(0,0,0,0.5)] border-t border-white/5">
-        <button 
-          onClick={() => setActiveTab('home')}
-          className={`flex flex-col items-center justify-center px-5 py-2 rounded-2xl transition-all duration-300 active:scale-95 ${activeTab === 'home' ? 'bg-primary/10 text-primary shadow-[0_0_15px_rgba(184,253,75,0.15)]' : 'text-gray-500 hover:text-primary'}`}
-        >
-          <Activity size={24} className={activeTab === 'home' ? 'drop-shadow-[0_0_8px_rgba(184,253,75,0.4)]' : ''} />
-          <span className="font-label text-[10px] uppercase tracking-widest mt-1 font-bold">Home</span>
-        </button>
-        <button 
-          onClick={() => setActiveTab('plants')}
-          className={`flex flex-col items-center justify-center px-5 py-2 rounded-2xl transition-all duration-300 active:scale-95 ${activeTab === 'plants' ? 'bg-primary/10 text-primary shadow-[0_0_15px_rgba(184,253,75,0.15)]' : 'text-gray-500 hover:text-primary'}`}
-        >
-          <Leaf size={24} className={activeTab === 'plants' ? 'drop-shadow-[0_0_8px_rgba(184,253,75,0.4)]' : ''} />
-          <span className="font-label text-[10px] uppercase tracking-widest mt-1 font-bold">Plants</span>
-        </button>
-        <button 
-          onClick={() => setActiveTab('scan')}
-          className={`flex flex-col items-center justify-center px-5 py-2 rounded-2xl transition-all duration-300 active:scale-95 ${activeTab === 'scan' ? 'bg-primary/10 text-primary shadow-[0_0_15px_rgba(184,253,75,0.15)]' : 'text-gray-500 hover:text-primary'}`}
-        >
-          <Camera size={24} className={activeTab === 'scan' ? 'drop-shadow-[0_0_8px_rgba(184,253,75,0.4)]' : ''} />
-          <span className="font-label text-[10px] uppercase tracking-widest mt-1 font-bold">Scan</span>
-        </button>
-        <button 
-          onClick={() => setActiveTab('schedule')}
-          className={`flex flex-col items-center justify-center px-5 py-2 rounded-2xl transition-all duration-300 active:scale-95 ${activeTab === 'schedule' ? 'bg-primary/10 text-primary shadow-[0_0_15px_rgba(184,253,75,0.15)]' : 'text-gray-500 hover:text-primary'}`}
-        >
-          <Terminal size={24} className={activeTab === 'schedule' ? 'drop-shadow-[0_0_8px_rgba(184,253,75,0.4)]' : ''} />
-          <span className="font-label text-[10px] uppercase tracking-widest mt-1 font-bold">Console</span>
-        </button>
+      <nav className="fixed bottom-0 w-full z-50 px-4 pb-[max(env(safe-area-inset-bottom),1.5rem)] flex justify-center items-center bg-gradient-to-t from-[#04110c] via-[#04110c]/80 to-transparent pt-8 pointer-events-none">
+        <div className="w-full max-w-md rounded-full border border-white/5 bg-[#04110c]/60 backdrop-blur-[64px] shadow-2xl shadow-black/40 flex justify-around items-center px-2 py-2 pointer-events-auto">
+          <button 
+            onClick={() => setActiveTab('home')}
+            className={`flex flex-col items-center justify-center p-3 rounded-full transition-all duration-300 ${activeTab === 'home' ? 'bg-primary text-[#04110c] shadow-[0_0_20px_rgba(192,254,113,0.4)] scale-110' : 'text-primary/60 hover:text-primary active:scale-95'}`}
+          >
+            <Activity size={24} />
+            <span className="font-label text-[9px] uppercase tracking-widest mt-1 hidden sm:block">Home</span>
+          </button>
+          <button 
+            onClick={() => setActiveTab('plants')}
+            className={`flex flex-col items-center justify-center p-3 rounded-full transition-all duration-300 ${activeTab === 'plants' ? 'bg-primary text-[#04110c] shadow-[0_0_20px_rgba(192,254,113,0.4)] scale-110' : 'text-primary/60 hover:text-primary active:scale-95'}`}
+          >
+            <Leaf size={24} />
+            <span className="font-label text-[9px] uppercase tracking-widest mt-1 hidden sm:block">Flora</span>
+          </button>
+          <button 
+            onClick={() => setActiveTab('scan')}
+            className={`flex flex-col items-center justify-center p-3 rounded-full transition-all duration-300 ${activeTab === 'scan' ? 'bg-primary text-[#04110c] shadow-[0_0_20px_rgba(192,254,113,0.4)] scale-110' : 'text-primary/60 hover:text-primary active:scale-95'}`}
+          >
+            <Camera size={24} />
+            <span className="font-label text-[9px] uppercase tracking-widest mt-1 hidden sm:block">Scan</span>
+          </button>
+          <button 
+            onClick={() => setActiveTab('schedule')}
+            className={`flex flex-col items-center justify-center p-3 rounded-full transition-all duration-300 ${activeTab === 'schedule' ? 'bg-primary text-[#04110c] shadow-[0_0_20px_rgba(192,254,113,0.4)] scale-110' : 'text-primary/60 hover:text-primary active:scale-95'}`}
+          >
+            <Terminal size={24} />
+            <span className="font-label text-[9px] uppercase tracking-widest mt-1 hidden sm:block">Console</span>
+          </button>
+        </div>
       </nav>
     </div>
   );

@@ -96,27 +96,6 @@ export const ScanTab = ({
           resolution={settings.resolution}
           onResolutionChange={(res: any) => setSettings({...settings, resolution: res})}
         />
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-48 h-48 border-2 border-primary-fixed border-dashed rounded-3xl relative">
-            <div className="absolute -top-1 -left-1 w-6 h-6 border-t-4 border-l-4 border-primary rounded-tl-lg"></div>
-            <div className="absolute -top-1 -right-1 w-6 h-6 border-t-4 border-r-4 border-primary rounded-tr-lg"></div>
-            <div className="absolute -bottom-1 -left-1 w-6 h-6 border-b-4 border-l-4 border-primary rounded-bl-lg"></div>
-            <div className="absolute -bottom-1 -right-1 w-6 h-6 border-b-4 border-r-4 border-primary rounded-br-lg"></div>
-          </div>
-        </div>
-        <div className="absolute top-6 left-1/2 -translate-x-1/2 w-[85%]">
-          <div className="glass-panel bg-primary/90 rounded-2xl p-4 flex items-start gap-3 border border-white/10 shadow-lg">
-            <div className="bg-primary-fixed rounded-full p-1.5 shrink-0">
-              <BrainCircuit className="text-primary" size={16} />
-            </div>
-            <div>
-              <p className="font-headline text-black text-xs font-bold uppercase tracking-wider mb-0.5">Gemma AI Insight</p>
-              <p className="text-primary-fixed text-sm leading-tight text-black/80">
-                {liveMode ? 'Neural Live Stream Active - Speak to Gemma' : 'Position leaf in the frame for real-time analysis'}
-              </p>
-            </div>
-          </div>
-        </div>
         
         {/* Live Mode Toggle Overlay */}
         <div className="absolute top-24 right-6">

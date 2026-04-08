@@ -262,37 +262,34 @@ const CameraFeed = forwardRef<CameraHandle, CameraFeedProps>(({ active, facingMo
           
           {/* Feed HUD */}
           <div className="absolute top-4 left-4 flex flex-col gap-2 z-20 pointer-events-none">
-            <div className="flex items-center gap-2 bg-black/60 px-3 py-1.5 rounded border border-cyber-accent/30 backdrop-blur-md">
-              <span className="text-[11px] sm:text-xs font-mono text-cyber-accent font-bold uppercase tracking-widest">
+            <div className="flex items-center gap-2 bg-black/60 px-3 py-1.5 rounded-full border border-primary/30 backdrop-blur-md">
+              <span className="text-[10px] sm:text-xs font-label text-primary font-bold uppercase tracking-widest">
                 CAM-01 // {facingMode.toUpperCase()} // {resolution.toUpperCase()}
               </span>
-            </div>
-            <div className="flex items-center gap-2 bg-black/40 px-3 py-1 rounded border border-white/5 text-[10px] sm:text-[11px] font-mono text-white/40">
-              {new Date().toLocaleTimeString()}
             </div>
           </div>
 
           {/* Controls Bar */}
           <div className="absolute top-4 right-4 flex gap-2 pointer-events-auto z-20">
             {hasTorch && active && (
-              <div className="flex bg-black/60 border border-white/10 rounded-lg p-0.5 backdrop-blur-md">
+              <div className="flex bg-black/60 border border-white/10 rounded-full p-0.5 backdrop-blur-md">
                 <button 
                   onClick={() => setFlashMode('off')}
-                  className={`p-1.5 rounded transition-all ${flashMode === 'off' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-white'}`}
+                  className={`p-1.5 rounded-full transition-all ${flashMode === 'off' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-white'}`}
                   title="Flash Off"
                 >
                   <ZapOff size={14} />
                 </button>
                 <button 
                   onClick={() => setFlashMode('on')}
-                  className={`p-1.5 rounded transition-all ${flashMode === 'on' ? 'bg-cyber-accent text-black shadow-[0_0_10px_rgba(132,204,22,0.5)]' : 'text-gray-500 hover:text-cyber-accent'}`}
+                  className={`p-1.5 rounded-full transition-all ${flashMode === 'on' ? 'bg-primary text-black shadow-[0_0_10px_rgba(192,254,113,0.5)]' : 'text-gray-500 hover:text-primary'}`}
                   title="Flash On"
                 >
                   <Zap size={14} fill={flashMode === 'on' ? 'currentColor' : 'none'} />
                 </button>
                 <button 
                   onClick={() => setFlashMode('auto')}
-                  className={`px-2 py-0.5 rounded text-[8px] font-bold transition-all font-mono ${flashMode === 'auto' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-white'}`}
+                  className={`px-2 py-0.5 rounded-full text-[8px] font-bold transition-all font-label tracking-widest ${flashMode === 'auto' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-white'}`}
                   title="Auto Flash (Experimental)"
                 >
                   AUTO
@@ -300,12 +297,12 @@ const CameraFeed = forwardRef<CameraHandle, CameraFeedProps>(({ active, facingMo
               </div>
             )}
             
-            <div className="flex bg-black/60 border border-white/10 rounded-lg p-1 backdrop-blur-md">
+            <div className="flex bg-black/60 border border-white/10 rounded-full p-1 backdrop-blur-md">
               {(['low', 'med', 'high'] as const).map((res) => (
                 <button
                   key={res}
                   onClick={() => onResolutionChange?.(res)}
-                  className={`px-3 py-1 text-[10px] sm:text-xs font-bold rounded transition-all font-mono uppercase ${resolution === res ? 'bg-cyber-success text-black' : 'text-gray-500 hover:text-white'}`}
+                  className={`px-3 py-1 text-[10px] sm:text-[10px] font-bold rounded-full transition-all font-label tracking-widest uppercase ${resolution === res ? 'bg-primary text-black shadow-[0_0_10px_rgba(192,254,113,0.5)]' : 'text-gray-500 hover:text-white'}`}
                 >
                   {res}
                 </button>
