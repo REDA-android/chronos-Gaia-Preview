@@ -54,7 +54,7 @@ export const sendMessage = async (
   let config: any = {};
 
   if (options.useThinking) {
-    modelName = MODEL_CHAT_PRO;
+    modelName = 'gemma-4-31b-it';
     config.thinkingConfig = { thinkingLevel: ThinkingLevel.HIGH };
   } else if (options.useSearch) {
     modelName = MODEL_SEARCH;

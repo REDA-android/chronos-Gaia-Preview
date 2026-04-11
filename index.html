@@ -20,57 +20,26 @@
               label: ["Space Grotesk", "sans-serif"]
             },
             colors: {
-              "primary": "#c0fe71",
-              "primary-fixed": "#c0fe71",
-              "on-primary-fixed": "#2e4d00",
-              "inverse-surface": "#edfdf4",
-              "surface-variant": "#162a22",
-              "secondary-container": "#2b4e3d",
-              "inverse-primary": "#416a00",
-              "surface-bright": "#1b3028",
+              "primary": "#ddffaf",
+              "primary-container": "#a2fe00",
               "primary-dim": "#b2ef64",
-              "secondary-fixed": "#c5ebd4",
-              "on-primary-fixed-variant": "#436c00",
-              "error": "#ff716c",
-              "on-tertiary": "#006834",
-              "on-error": "#490006",
-              "on-surface": "#edfdf4",
-              "surface-container": "#0c1d16",
-              "tertiary-fixed": "#6bfe9c",
-              "outline": "#6a7971",
-              "on-tertiary-container": "#005f2f",
+              "background": "#0b0f0b",
+              "surface": "#0b0f0b",
               "surface-dim": "#04110c",
-              "surface-container-low": "#071611",
-              "on-primary-container": "#152800",
-              "secondary-dim": "#b7ddc7",
-              "on-secondary-container": "#b3d9c2",
-              "primary-container": "#78b02c",
-              "secondary": "#c5ebd4",
-              "outline-variant": "#3d4b44",
-              "tertiary": "#c3ffcd",
-              "secondary-fixed-dim": "#b7ddc7",
-              "on-surface-variant": "#9fafa6",
-              "on-background": "#edfdf4",
-              "background": "#04110c",
-              "on-secondary": "#365947",
-              "tertiary-container": "#6bfe9c",
-              "surface": "#04110c",
-              "primary-fixed-dim": "#b2ef64",
-              "surface-container-high": "#11231c",
-              "tertiary-dim": "#5bef90",
-              "surface-tint": "#c0fe71",
-              "on-secondary-fixed-variant": "#406351",
-              "surface-container-highest": "#162a22",
-              "inverse-on-surface": "#4a5851",
-              "error-dim": "#d7383b",
-              "tertiary-fixed-dim": "#5bef90",
-              "on-primary": "#3b6100",
-              "on-secondary-fixed": "#244635",
               "surface-container-lowest": "#000000",
+              "surface-container-low": "#071611",
+              "surface-container": "#0c1d16",
+              "surface-container-high": "#11231c",
+              "surface-container-highest": "#162a22",
+              "surface-bright": "#1b3028",
+              "on-surface": "#edfdf4",
+              "on-surface-variant": "#a8aca5",
+              "outline": "#6a7971",
+              "outline-variant": "#3d4b44",
+              "error": "#ff716c",
+              "on-error": "#490006",
               "error-container": "#9f0519",
               "on-error-container": "#ffa8a3",
-              "on-tertiary-fixed-variant": "#006a35",
-              "on-tertiary-fixed": "#004a23"
             }
           }
         }
@@ -78,15 +47,15 @@
     </script>
     <style>
       body {
-        background-color: #04110c;
+        background-color: #0b0f0b;
         color: #edfdf4;
         font-family: 'Inter', sans-serif;
       }
       /* Custom scrollbar */
       ::-webkit-scrollbar { width: 6px; height: 6px; }
-      ::-webkit-scrollbar-track { background: #04110c; }
+      ::-webkit-scrollbar-track { background: #0b0f0b; }
       ::-webkit-scrollbar-thumb { background: #162a22; border-radius: 3px; }
-      ::-webkit-scrollbar-thumb:hover { background: #c0fe71; }
+      ::-webkit-scrollbar-thumb:hover { background: #ddffaf; }
       
       .glass-panel {
         background: rgba(12, 29, 22, 0.4);
@@ -98,18 +67,18 @@
         box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 8px 32px 0 rgba(0, 0, 0, 0.8);
       }
       .bg-midnight-botanical {
-        background-color: #081611;
-        background-image: radial-gradient(circle at 0% 0%, rgba(157, 216, 80, 0.05) 0%, transparent 50%), radial-gradient(circle at 100% 100%, rgba(90, 218, 206, 0.05) 0%, transparent 50%);
+        background-color: #0b0f0b;
+        background-image: radial-gradient(circle at 0% 0%, rgba(221, 255, 175, 0.05) 0%, transparent 50%), radial-gradient(circle at 100% 100%, rgba(162, 254, 0, 0.05) 0%, transparent 50%);
       }
       .squishy-slider::-webkit-slider-thumb {
         -webkit-appearance: none;
         appearance: none;
         width: 24px;
         height: 24px;
-        background: #c0fe71;
+        background: #ddffaf;
         border-radius: 50%;
         cursor: pointer;
-        box-shadow: 0 0 15px rgba(192, 254, 113, 0.6);
+        box-shadow: 0 0 15px rgba(221, 255, 175, 0.6);
         transition: transform 0.2s cubic-bezier(0.68, -0.6, 0.32, 1.6);
       }
       .squishy-slider:active::-webkit-slider-thumb {
