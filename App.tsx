@@ -412,7 +412,7 @@ const App: React.FC = () => {
     setIsProcessing(true);
     try {
       // Check if the user is asking about an image and we have images
-      const isAskingAboutImage = /image|photo|picture|scan|capture|see/i.test(newMsg.text);
+      const isAskingAboutImage = /image|photo|picture|scan|capture|see|voir|dernière|derniere|plante/i.test(newMsg.text);
       const latestImage = isAskingAboutImage && images.length > 0 ? images[0].data : undefined;
 
       const result = await sendMessage(chatMessages, newMsg.text, {

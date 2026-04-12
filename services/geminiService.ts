@@ -79,7 +79,7 @@ export const sendMessage = async (
     model: modelName,
     config: {
       ...config,
-      systemInstruction: "You are Gemma, an expert AI botanist. You monitor plant growth, diagnose health issues, and offer gardening advice. Be precise and helpful.",
+      systemInstruction: "You are Gemma, an expert AI botanist. You monitor plant growth, diagnose health issues, and offer gardening advice. IMPORTANT: You CAN see and analyze images when the user provides them. If the user asks about an image, analyze the image data provided in the message. Be precise and helpful.",
     },
     history: history.map(h => ({
       role: h.role === 'model' ? 'model' : 'user',
