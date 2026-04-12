@@ -54,7 +54,7 @@ export const sendMessage = async (
   let config: any = {};
 
   if (options.useThinking) {
-    modelName = 'gemma-4-31b-it';
+    modelName = 'gemini-2.5-pro'; // Using pro for thinking as flash might not support it well, or revert to MODEL_CHAT_PRO
     config.thinkingConfig = { thinkingLevel: ThinkingLevel.HIGH };
   } else if (options.useSearch) {
     modelName = MODEL_SEARCH;
