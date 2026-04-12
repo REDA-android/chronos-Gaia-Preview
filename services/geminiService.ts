@@ -46,6 +46,7 @@ export const sendMessage = async (
     useSearch?: boolean;
     useMaps?: boolean;
     location?: { lat: number; lng: number };
+    image?: string; // Base64 image data
   } = {}
 ): Promise<{ text: string; candidates: any[] }> => {
   const ai = getAI();
@@ -87,7 +88,14 @@ export const sendMessage = async (
   });
 
   try {
-    const response = await chat.sendMessage({ message: newMessage });
+    let messageParts: any[] = [{ text: newMessage }];
+    
+    if (options.image) {
+      const cleanBase64 = options.image.split(',')[1];
+      messageParts.push({ inlineData: { mimeType: 'image/jpeg', data: cleanBase64 } });
+    }
+
+    const response = await chat.sendMessage({ message: messageParts });
     
     return {
       text: response.text,
