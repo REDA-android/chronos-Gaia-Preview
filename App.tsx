@@ -34,7 +34,7 @@ import CameraFeed, { CameraHandle } from './components/CameraFeed';
 import LiveAudio, { LiveAudioHandle } from './components/LiveAudio';
 import Timeline from './components/Timeline';
 import Onboarding from './components/Onboarding';
-import { HomeTab, ScanTab, PlantsTab, ScheduleTab } from './components/NewUI';
+import { HomeTab, ScanTab, PlantsTab, ScheduleTab, LibraryTab } from './components/NewUI';
 import confetti from 'canvas-confetti';
 import { CapturedImage, MonitorSettings, ChatMessage, UserProfile } from './types';
 import { 
@@ -84,7 +84,8 @@ import {
   HelpCircle,
   Lightbulb,
   LogOut,
-  X
+  X,
+  BookOpen
 } from 'lucide-react';
 
 const App: React.FC = () => {
@@ -654,7 +655,7 @@ const App: React.FC = () => {
 
       <div className="flex-1 flex overflow-hidden relative">
         <main className="flex-1 p-4 sm:p-6 space-y-6 overflow-y-auto custom-scrollbar pt-[calc(6rem+max(env(safe-area-inset-top),2rem))] pb-[calc(8rem+max(env(safe-area-inset-bottom),2rem))] max-w-7xl mx-auto w-full">
-          {activeTab === 'home' && <HomeTab images={images} active={active} setActive={setActive} />}
+          {activeTab === 'home' && <HomeTab images={images} active={active} setActive={setActive} settings={settings} setSettings={setSettings} />}
           {activeTab === 'scan' && (
             <ScanTab 
               cameraRef={cameraRef} 
@@ -677,6 +678,9 @@ const App: React.FC = () => {
               setPlaybackMode={setPlaybackMode} 
               deleteSnapshot={deleteSnapshot} 
             />
+          )}
+          {activeTab === 'library' && (
+            <LibraryTab images={images} />
           )}
           {activeTab === 'schedule' && (
             <ScheduleTab 
@@ -1118,16 +1122,22 @@ const App: React.FC = () => {
             <Activity size={24} />
           </button>
           <button 
-            onClick={() => setActiveTab('plants')}
-            className={`flex flex-col items-center justify-center p-3 rounded-full transition-all duration-500 ${activeTab === 'plants' ? 'bg-primary/20 text-primary shadow-[0_0_20px_rgba(221,255,175,0.2)] scale-110' : 'text-on-surface-variant hover:text-primary hover:scale-110 active:scale-95'}`}
+            onClick={() => setActiveTab('library')}
+            className={`flex flex-col items-center justify-center p-3 rounded-full transition-all duration-500 ${activeTab === 'library' ? 'bg-primary/20 text-primary shadow-[0_0_20px_rgba(221,255,175,0.2)] scale-110' : 'text-on-surface-variant hover:text-primary hover:scale-110 active:scale-95'}`}
           >
-            <Leaf size={24} />
+            <BookOpen size={24} />
           </button>
           <button 
             onClick={() => setActiveTab('scan')}
             className={`flex flex-col items-center justify-center p-3 rounded-full transition-all duration-500 ${activeTab === 'scan' ? 'bg-primary/20 text-primary shadow-[0_0_20px_rgba(221,255,175,0.2)] scale-110' : 'text-on-surface-variant hover:text-primary hover:scale-110 active:scale-95'}`}
           >
             <Camera size={24} />
+          </button>
+          <button 
+            onClick={() => setActiveTab('plants')}
+            className={`flex flex-col items-center justify-center p-3 rounded-full transition-all duration-500 ${activeTab === 'plants' ? 'bg-primary/20 text-primary shadow-[0_0_20px_rgba(221,255,175,0.2)] scale-110' : 'text-on-surface-variant hover:text-primary hover:scale-110 active:scale-95'}`}
+          >
+            <Clock size={24} />
           </button>
           <button 
             onClick={() => setActiveTab('schedule')}

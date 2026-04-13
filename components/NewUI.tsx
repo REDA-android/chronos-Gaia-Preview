@@ -4,18 +4,25 @@ import { CapturedImage, ChatMessage } from '../types';
 import CameraFeed from './CameraFeed';
 import Timeline from './Timeline';
 import Markdown from 'react-markdown';
+import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { 
   Leaf, Play, Square, MessageSquare, MapPin, Globe, BrainCircuit, Volume2,
   Clock, Eye, FileText, PlayCircle, EyeOff, Trash2, AlertTriangle, Activity,
-  Terminal, Settings, Camera, FastForward, Cpu, Sun, Power, LogOut, X, Droplet, Zap
+  Terminal, Settings, Camera, FastForward, Cpu, Sun, Power, LogOut, X, Droplet, Zap, BookOpen, CheckCircle
 } from 'lucide-react';
 
-export const HomeTab = ({ images, active, setActive }: any) => {
+export const HomeTab = ({ images, active, setActive, settings, setSettings }: any) => {
   const healthyCount = images.filter((img: any) => img.healthStatus === 'HEALTHY').length;
   const totalWithStatus = images.filter((img: any) => img.healthStatus).length;
   const healthScore = totalWithStatus > 0 ? Math.round((healthyCount / totalWithStatus) * 100) : 100;
   const stressedPlants = images.filter((img: any) => img.healthStatus === 'STRESSED' || img.healthStatus === 'CRITICAL');
   
+  // Prepare chart data
+  const chartData = [...images].reverse().slice(-10).map((img: any, i: number) => ({
+    name: i.toString(),
+    score: img.healthStatus === 'HEALTHY' ? 100 : (img.healthStatus === 'STRESSED' ? 50 : (img.healthStatus === 'CRITICAL' ? 10 : 80))
+  }));
+
   return (
     <div className="space-y-10 animate-in fade-in duration-500">
       <section className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-primary to-primary-container p-8 text-on-primary shadow-2xl">
@@ -47,6 +54,27 @@ export const HomeTab = ({ images, active, setActive }: any) => {
           <Leaf size={160} className="text-primary" />
         </div>
       </section>
+
+      {/* Health Trend Chart */}
+      {chartData.length > 2 && (
+        <section className="space-y-4">
+          <h2 className="font-headline text-2xl font-bold tracking-tight text-primary">Health Trend</h2>
+          <div className="bg-surface-container-low p-5 rounded-3xl border border-white/5 h-48">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={chartData}>
+                <defs>
+                  <linearGradient id="colorScore" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#ddffaf" stopOpacity={0.3}/>
+                    <stop offset="95%" stopColor="#ddffaf" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <Tooltip contentStyle={{ backgroundColor: '#0b0f0b', borderColor: '#ddffaf', borderRadius: '8px' }} />
+                <Area type="monotone" dataKey="score" stroke="#ddffaf" fillOpacity={1} fill="url(#colorScore)" />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        </section>
+      )}
 
       <section className="space-y-4">
         <div className="flex items-center justify-between">
@@ -127,6 +155,55 @@ export const ScanTab = ({
     </div>
   </div>
 );
+
+export const LibraryTab = ({ images }: any) => {
+  // Group images by plant type (mocked by using the first word of analysis or 'Unknown Specimen')
+  const plants = images.reduce((acc: any, img: any) => {
+    const nameMatch = img.analysis?.match(/([A-Z][a-z]+(?:\s[A-Z][a-z]+)*)/);
+    const name = nameMatch ? nameMatch[1] : 'Unknown Specimen';
+    if (!acc[name]) acc[name] = [];
+    acc[name].push(img);
+    return acc;
+  }, {});
+
+  return (
+    <div className="space-y-6 animate-in fade-in duration-500">
+      <div className="flex justify-between items-end mb-6">
+        <div className="space-y-1">
+          <span className="font-label text-[10px] uppercase tracking-widest text-secondary font-semibold">Botanical Database</span>
+          <h2 className="font-headline text-3xl font-extrabold text-primary">My Plants</h2>
+        </div>
+      </div>
+      
+      {Object.keys(plants).length === 0 ? (
+        <div className="bg-surface-container-low p-8 rounded-3xl border border-white/5 text-center space-y-4">
+          <BookOpen size={48} className="mx-auto text-primary/20" />
+          <p className="font-headline text-lg font-bold text-on-surface">Database Empty</p>
+          <p className="text-secondary text-sm">Scan plants to add them to your neural library.</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {Object.entries(plants).map(([name, imgs]: [string, any]) => (
+            <div key={name} className="bg-surface-container-low p-5 rounded-3xl border border-white/5 flex gap-4 hover:bg-surface-container transition-colors cursor-pointer">
+              <div className="w-24 h-24 rounded-2xl overflow-hidden bg-black flex-shrink-0">
+                <img src={imgs[0].dataUrl} alt={name} className="w-full h-full object-cover" />
+              </div>
+              <div className="flex flex-col justify-center">
+                <h3 className="font-headline font-bold text-lg text-on-surface">{name}</h3>
+                <p className="text-sm text-secondary">{imgs.length} observations</p>
+                <div className="mt-2 flex gap-2">
+                  <span className="px-2 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded-full font-label uppercase">
+                    {imgs[0].healthStatus || 'UNKNOWN'}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export const PlantsTab = ({ images, setSelectedImage, setPlaybackMode, deleteSnapshot }: any) => (
   <div className="space-y-6 animate-in fade-in duration-500">
